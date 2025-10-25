@@ -16,7 +16,7 @@ public class StudentManager {
         }
     }
 
-    // CRUD Operations 
+    // Operations 
 
     public String addStudent(Student s) {
         // Prevent duplicate ID
