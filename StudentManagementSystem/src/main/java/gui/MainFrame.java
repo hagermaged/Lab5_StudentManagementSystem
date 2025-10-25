@@ -14,11 +14,29 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
-        initComponents();
-        DashboardPanel dashboard = new DashboardPanel();
-        MainPanel.add(dashboard, "Dashboard");
-
-    }
+    initComponents();
+    
+    // Add all panels to CardLayout
+    DashboardPanel dashboard = new DashboardPanel();
+    AddStudentPanel addStudent = new AddStudentPanel();
+    
+    MainPanel.add(dashboard, "Dashboard");
+    MainPanel.add(addStudent, "AddStudentPanel");
+    
+    // Show dashboard first
+    showPanel("Dashboard");
+    
+    setSize(800, 600);
+    setResizable(true);
+    setLocationRelativeTo(null);
+    
+    pack(); // Add this line to force the window to resize properly
+}
+// Add this method to switch panels
+public void showPanel(String panelName) {
+    java.awt.CardLayout cardLayout = (java.awt.CardLayout) MainPanel.getLayout();
+    cardLayout.show(MainPanel, panelName);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,6 +51,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 

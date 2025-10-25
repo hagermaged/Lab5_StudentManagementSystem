@@ -17,45 +17,45 @@ public class DashboardPanel extends javax.swing.JPanel {
         initComponents();
         // Make buttons rounded - add this ONE method call
         makeButtonsRounded();
+        setPreferredSize(new java.awt.Dimension(800, 600));
     }
     private void makeButtonsRounded() {
     // Apply to all buttons
-    javax.swing.JButton[] buttons = {jButton8, jButton4, jButton9, jButton6, jButton7};
-    for (javax.swing.JButton button : buttons) {
-//        button.setContentAreaFilled(false);
-//        button.setOpaque(false);
-        button.setBorder(new RoundedBorder(20, new java.awt.Color(0, 30, 80), 2));
+//    javax.swing.JButton[] buttons = {jButton8, jButton4, jButton9, jButton6, jButton7};
+//    for (javax.swing.JButton button : buttons) {
+////        button.setContentAreaFilled(false);
+////        button.setOpaque(false);
+//        button.setBorder(new RoundedBorder(20, new java.awt.Color(0, 30, 80), 2));
     }
-}
 
 // Simple border class
-class RoundedBorder implements javax.swing.border.Border {
-    private int radius;
-    private java.awt.Color color;
-    private int thickness;
-
-    RoundedBorder(int radius, java.awt.Color color, int thickness) {
-        this.radius = radius;
-        this.color = color;
-        this.thickness = thickness;
-    }
-
-    public java.awt.Insets getBorderInsets(java.awt.Component c) {
-        return new java.awt.Insets(this.radius, this.radius, this.radius, this.radius);
-    }
-
-    public boolean isBorderOpaque() {
-        return true;
-    }
-
-    public void paintBorder(java.awt.Component c, java.awt.Graphics g, int x, int y, int width, int height) {
-        java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
-        g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(color);
-        g2.setStroke(new java.awt.BasicStroke(thickness));
-        g2.drawRoundRect(x + thickness/2, y + thickness/2, width - thickness, height - thickness, radius, radius);
-    }
-}
+//class RoundedBorder implements javax.swing.border.Border {
+//    private int radius;
+//    private java.awt.Color color;
+//    private int thickness;
+//
+//    RoundedBorder(int radius, java.awt.Color color, int thickness) {
+//        this.radius = radius;
+//        this.color = color;
+//        this.thickness = thickness;
+//    }
+//
+//    public java.awt.Insets getBorderInsets(java.awt.Component c) {
+//        return new java.awt.Insets(this.radius, this.radius, this.radius, this.radius);
+//    }
+//
+//    public boolean isBorderOpaque() {
+//        return true;
+//    }
+//
+//    public void paintBorder(java.awt.Component c, java.awt.Graphics g, int x, int y, int width, int height) {
+//        java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
+//        g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+//        g2.setColor(color);
+//        g2.setStroke(new java.awt.BasicStroke(thickness));
+//        g2.drawRoundRect(x + thickness/2, y + thickness/2, width - thickness, height - thickness, radius, radius);
+//    }
+//}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,7 +69,7 @@ class RoundedBorder implements javax.swing.border.Border {
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        addStudentButton = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
@@ -124,21 +124,21 @@ class RoundedBorder implements javax.swing.border.Border {
                 jButton7ActionPerformed(evt);
             }
         });
-        add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 190, 60));
+        add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 190, 60));
 
-        jButton8.setBackground(new java.awt.Color(0, 30, 80));
-        jButton8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(250, 248, 242));
-        jButton8.setText("Add Student");
-        jButton8.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 25, 10, 25));
-        jButton8.setBorderPainted(false);
-        jButton8.setFocusPainted(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        addStudentButton.setBackground(new java.awt.Color(0, 30, 80));
+        addStudentButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        addStudentButton.setForeground(new java.awt.Color(250, 248, 242));
+        addStudentButton.setText("Add Student");
+        addStudentButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 25, 10, 25));
+        addStudentButton.setBorderPainted(false);
+        addStudentButton.setFocusPainted(false);
+        addStudentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                addStudentButtonActionPerformed(evt);
             }
         });
-        add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 190, 60));
+        add(addStudentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 190, 60));
 
         jButton9.setBackground(new java.awt.Color(0, 30, 80));
         jButton9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
@@ -191,9 +191,19 @@ class RoundedBorder implements javax.swing.border.Border {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
+        System.out.println("=== ADD STUDENT BUTTON CLICKED ===");
+    java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+    System.out.println("Window found: " + window);
+    System.out.println("Window is MainFrame: " + (window instanceof MainFrame));
+    
+    if (window instanceof MainFrame) {
+        MainFrame mainFrame = (MainFrame) window;
+        System.out.println("Switching to AddStudentPanel...");
+        mainFrame.showPanel("AddStudentPanel");
+        System.out.println("Switch completed!");
+    }
+    }//GEN-LAST:event_addStudentButtonActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
@@ -201,10 +211,10 @@ class RoundedBorder implements javax.swing.border.Border {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addStudentButton;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
