@@ -77,7 +77,7 @@ public class AddStudentPanel extends javax.swing.JPanel {
         Studentgender = new javax.swing.JComboBox<>();
         studentAge = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         returnToMenu = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
@@ -142,16 +142,16 @@ public class AddStudentPanel extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(0, 30, 80));
         jLabel7.setText("➡ GPA");
 
-        jButton8.setBackground(new java.awt.Color(0, 30, 80));
-        jButton8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(250, 248, 242));
-        jButton8.setText("SAVE");
-        jButton8.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 25, 10, 25));
-        jButton8.setBorderPainted(false);
-        jButton8.setFocusPainted(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setBackground(new java.awt.Color(0, 30, 80));
+        saveButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        saveButton.setForeground(new java.awt.Color(250, 248, 242));
+        saveButton.setText("SAVE");
+        saveButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 25, 10, 25));
+        saveButton.setBorderPainted(false);
+        saveButton.setFocusPainted(false);
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
@@ -217,7 +217,7 @@ public class AddStudentPanel extends javax.swing.JPanel {
                                 .addComponent(returnToMenu)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
@@ -250,7 +250,7 @@ public class AddStudentPanel extends javax.swing.JPanel {
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8))
+                    .addComponent(saveButton))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,9 +271,41 @@ public class AddStudentPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_studentAgeActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+    try {
+        // Get values from form
+        int id = Integer.parseInt(studentId.getText());
+        String name = studentName.getText();
+        double age = Double.parseDouble(studentAge.getText());
+        String gender = Studentgender.getSelectedItem().toString();
+        String department = studentDepartment.getText();
+        double gpa = Double.parseDouble(studentGpa.getText());
+        
+        // Create Student object
+        model.Student student = new model.Student(id, name, age, gender, department, gpa);
+        
+        // Create StudentManager and add student
+        model.StudentManager manager = new model.StudentManager();
+        String result = manager.addStudent(student);
+        
+        // Show result message
+        javax.swing.JOptionPane.showMessageDialog(this, result);
+        
+        // Clear form if successful
+        if (result.contains("successfully")) {
+            clearForm();
+        }
+        
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Please enter valid numbers for ID, Age, and GPA!", "Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Error: " + e.getMessage(), "Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     private void returnToMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMenuActionPerformed
         java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
@@ -286,7 +318,6 @@ public class AddStudentPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Studentgender;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -298,10 +329,19 @@ public class AddStudentPanel extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JButton returnToMenu;
+    private javax.swing.JButton saveButton;
     private javax.swing.JTextField studentAge;
     private javax.swing.JTextField studentDepartment;
     private javax.swing.JTextField studentGpa;
     private javax.swing.JTextField studentId;
     private javax.swing.JTextField studentName;
     // End of variables declaration//GEN-END:variables
+    private void clearForm() {
+    studentId.setText("");
+    studentName.setText("");
+    studentAge.setText("");
+    studentDepartment.setText("");
+    studentGpa.setText("");
+    Studentgender.setSelectedIndex(0);
+}
 }
