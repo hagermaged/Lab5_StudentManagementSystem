@@ -12,10 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author KimoStore
- */
+
 public class FileHandler {
 
     private static final String filename = "Students.txt";
@@ -39,24 +36,27 @@ public class FileHandler {
 
         try (BufferedReader rf = new BufferedReader(new FileReader(filename))) {
             String line = rf.readLine();
-            while (line != null) {
+            while ((line = rf.readLine()) != null) {
                 String[] dataofonestudent = line.split(",");
-                int id = Integer.parseInt(dataofonestudent[0]);
-                String name = dataofonestudent[1];
-                double age = Double.parseDouble(dataofonestudent[2]);
-                String gender = dataofonestudent[3];
-                String depart = dataofonestudent[4];
-                double gpa = Double.parseDouble(dataofonestudent[5]);
-
-                Student s = new Student(id, name, age, gender, depart, gpa);
-
-                students.add(s);
-
+                if (data.length == 6) {
+                try {
+                    int id = Integer.parseInt(data[0].trim());
+                    String name = data[1].trim();
+                    double age = Double.parseDouble(data[2].trim());
+                    String gender = data[3].trim();
+                    String dept = data[4].trim();
+                    double gpa = Double.parseDouble(data[5].trim());
+                    students.add(new Student(id, name, age, gender, dept, gpa));
+                } catch (NumberFormatException | IllegalArgumentException ex) {
+                    // Skip bad record but continue reading others
+                    Logger.getLogger(FileHandler.class.getName())
+                          .log(Level.WARNING, "Skipping invalid record: " + line, ex);
+                }
             }
-        } catch (IOException | NumberFormatException e)
-        {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, e);
         }
+    } catch (IOException ex) {
+        Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+    }
 
         return students;
 
