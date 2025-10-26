@@ -29,8 +29,9 @@ public class ViewStudentsPanel extends javax.swing.JPanel {
     
     
     public ViewStudentsPanel() throws IOException {
-        this.studentManager=new StudentManager();
+       
         initComponents();
+        this.studentManager=new StudentManager();
         setupTable();
         loadStudentData();
     }
@@ -49,6 +50,7 @@ public class ViewStudentsPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setAlignmentX(0.0F);
@@ -97,6 +99,14 @@ public class ViewStudentsPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setText("Return to menu");
+        jButton2.setName("returntomenubutton"); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,6 +121,8 @@ public class ViewStudentsPanel extends javax.swing.JPanel {
                 .addContainerGap(19, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(103, 103, 103))
         );
@@ -121,7 +133,9 @@ public class ViewStudentsPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(0, 62, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -129,6 +143,15 @@ public class ViewStudentsPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         refreshTable();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+          java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+         if (window instanceof MainFrame) {
+        MainFrame mainFrame = (MainFrame) window;
+        mainFrame.showPanel("Dashboard");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 private void setupTable() {
         jTable1.setDefaultEditor(Object.class, null);
         jTable1.getTableHeader().setReorderingAllowed(false);
@@ -187,6 +210,7 @@ try {
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

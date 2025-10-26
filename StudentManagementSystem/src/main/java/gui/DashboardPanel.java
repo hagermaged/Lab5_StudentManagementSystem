@@ -190,8 +190,7 @@ public class DashboardPanel extends javax.swing.JPanel {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-         System.out.println("View Students button clicked!");
-    
+        System.out.println("View Students button clicked!");
     try {
         // Debug: Print parent hierarchy
         Container parent = getParent();
@@ -264,6 +263,11 @@ public class DashboardPanel extends javax.swing.JPanel {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+    if (window instanceof MainFrame) {
+        MainFrame mainFrame = (MainFrame) window;
+        mainFrame.showPanel("DeleteStudentPanel");
+    }
     }//GEN-LAST:event_jButton9ActionPerformed
 
 
