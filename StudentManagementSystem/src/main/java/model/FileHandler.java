@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,32 +34,77 @@ public class FileHandler {
 
     }
 
-    public static List<Student> loadfromfile() throws IOException {
+  public static List<Student> loadfromfile() throws IOException {
+    List<Student> students = new ArrayList<>();
 
-        List<Student> students = new ArrayList<>();
+    File file = new File(filename);
+    if (!file.exists()) {
+        System.out.println("File not found: " + filename);
+        return students;
+    }
 
-        try (BufferedReader rf = new BufferedReader(new FileReader(filename))) {
-            String line = rf.readLine();
-            while (line != null) {
+    try (BufferedReader rf = new BufferedReader(new FileReader(filename))) {
+        String line;
+        int lineNumber = 0;
+        
+        while ((line = rf.readLine()) != null) {
+            lineNumber++;
+            try {
+                if (line.trim().isEmpty()) continue; // Skip empty lines
+                
                 String[] dataofonestudent = line.split(",");
-                int id = Integer.parseInt(dataofonestudent[0]);
-                String name = dataofonestudent[1];
-                double age = Double.parseDouble(dataofonestudent[2]);
-                String gender = dataofonestudent[3];
-                String depart = dataofonestudent[4];
-                double gpa = Double.parseDouble(dataofonestudent[5]);
+                if (dataofonestudent.length != 6) {
+                    System.err.println("Skipping invalid line " + lineNumber + ": " + line);
+                    continue;
+                }
+                
+                int id = Integer.parseInt(dataofonestudent[0].trim());
+                String name = dataofonestudent[1].trim();
+                double age = Double.parseDouble(dataofonestudent[2].trim());
+                String gender = dataofonestudent[3].trim();
+                String depart = dataofonestudent[4].trim();
+                double gpa = Double.parseDouble(dataofonestudent[5].trim());
 
                 Student s = new Student(id, name, age, gender, depart, gpa);
-
                 students.add(s);
-
+                
+            } catch (Exception e) {
+                System.err.println("Error parsing line " + lineNumber + ": " + line);
+                System.err.println("Error: " + e.getMessage());
+                // Continue with next line instead of stopping
             }
-        } catch (IOException | NumberFormatException e)
-        {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, e);
         }
-
-        return students;
-
+        
+        System.out.println("Loaded " + students.size() + " students from file");
+        
+    } catch (IOException | NumberFormatException e) {
+        System.err.println("Error loading file: " + e.getMessage());
+        Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, e);
     }
+
+    return students;
+}
+  public static void debugFile() {
+    try {
+        File file = new File(filename);
+        if (!file.exists()) {
+            System.out.println("File does not exist: " + filename);
+            return;
+        }
+        
+        System.out.println("=== DEBUGGING FILE CONTENT ===");
+        try (BufferedReader rf = new BufferedReader(new FileReader(filename))) {
+            String line;
+            int lineNumber = 0;
+            while ((line = rf.readLine()) != null) {
+                lineNumber++;
+                System.out.println("Line " + lineNumber + ": " + line);
+                String[] parts = line.split(",");
+                System.out.println("  Parts: " + Arrays.toString(parts));
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 }
