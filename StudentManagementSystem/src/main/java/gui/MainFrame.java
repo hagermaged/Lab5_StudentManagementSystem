@@ -23,10 +23,12 @@ public class MainFrame extends javax.swing.JFrame {
     // Add all panels to CardLayout
     DashboardPanel dashboard = new DashboardPanel();
     AddStudentPanel addStudent = new AddStudentPanel();
-   
+    // ViewStudentsPanel viewStudents = new ViewStudentsPanel();
+     SearchUpdatePanel searchUpdate = new SearchUpdatePanel();   
     MainPanel.add(dashboard, "Dashboard");
     MainPanel.add(addStudent, "AddStudentPanel");
-  
+   // MainPanel.add(viewStudents, "ViewStudentsPanel");
+    MainPanel.add(searchUpdate, "SearchUpdatePanel");
     // Show dashboard first
     showPanel("Dashboard");
     

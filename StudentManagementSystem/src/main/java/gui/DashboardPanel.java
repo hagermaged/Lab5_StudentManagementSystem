@@ -235,6 +235,17 @@ public class DashboardPanel extends javax.swing.JPanel {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+    System.out.println("=== SEARCH/UPDATE BUTTON CLICKED ===");
+    java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+    System.out.println("Window found: " + window);
+    System.out.println("Window is MainFrame: " + (window instanceof MainFrame));
+    
+    if (window instanceof MainFrame) {
+        MainFrame mainFrame = (MainFrame) window;
+        System.out.println("Switching to SearchUpdatePanel...");
+        mainFrame.showPanel("SearchUpdatePanel");
+        System.out.println("Switch completed!");
+    }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
