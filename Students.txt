@@ -1,0 +1,7 @@
+201,Salem Mustafa,20.0,Male,Civil Engineering,3.15
+202,Bad Age Student,Twenty,Female,Physics,3.5
+203,Bad Gpa Student,22.0,Male,Chemistry,5.0
+204,Bad Gender Student,19.0,Other,Arts,3.0
+205,Missing Field,21.0,Male,3.3
+206,Laila Saeed,23.0,Female,Management,3.9
+ID-X,Invalid ID,20.0,Male,IT,3.0
