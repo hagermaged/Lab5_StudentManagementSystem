@@ -1,5 +1,3 @@
 9738,hager,20.0,Female,compu,3.9
 9492,jana,20.0,Female,compu,3.5
-9888,malek,19.0,Male,mecha,4.0
 9444,judy,21.0,Female,arch,3.3
-9666,sara,21.0,Female,mecha,4.0

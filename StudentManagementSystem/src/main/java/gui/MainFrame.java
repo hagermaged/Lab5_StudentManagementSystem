@@ -21,18 +21,20 @@ public class MainFrame extends javax.swing.JFrame {
     initComponents();
     
     // Add all panels to CardLayout
+    LoginPanel loginPanel = new LoginPanel();
     DashboardPanel dashboard = new DashboardPanel();
     AddStudentPanel addStudent = new AddStudentPanel();
     //ViewStudentsPanel viewStudents = new ViewStudentsPanel();
      SearchUpdatePanel searchUpdate = new SearchUpdatePanel();  
      DeleteStudentPanel deleteStudent = new DeleteStudentPanel();
+    MainPanel.add(loginPanel, "Login");
     MainPanel.add(dashboard, "Dashboard");
     MainPanel.add(addStudent, "AddStudentPanel");
     //MainPanel.add(viewStudents, "ViewStudentsPanel");
     MainPanel.add(searchUpdate, "SearchUpdatePanel");
     MainPanel.add(deleteStudent, "DeleteStudentPanel");
     // Show dashboard first
-    showPanel("Dashboard");
+    showPanel("Login");
     
     setSize(800, 600);
     setResizable(true);
@@ -41,10 +43,12 @@ public class MainFrame extends javax.swing.JFrame {
     pack(); // Add this line to force the window to resize properly
 }
 // Add this method to switch panels
-public void showPanel(String panelName) {
-    java.awt.CardLayout cardLayout = (java.awt.CardLayout) MainPanel.getLayout();
-    cardLayout.show(MainPanel, panelName);
-}
+   public void showPanel(String panelName) {
+        // Get the CardLayout from MainPanel
+        java.awt.CardLayout cardLayout = (java.awt.CardLayout) MainPanel.getLayout();
+        // Show the panel with the specified name
+        cardLayout.show(MainPanel, panelName);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
