@@ -48,26 +48,34 @@ public class StudentManager {
     }
 
     public String updateStudent(int id, Student newData) {
-        for (Student s : students) {
-            if (s.getId() == id) {
-                try {
-                    s.setFullName(newData.getFullName());
-                    s.setAge(newData.getAge());
-                    s.setGender(newData.getGender());
-                    s.setDepartment(newData.getDepartment());
-                    s.setGpa(newData.getGPA());
-
-                    FileHandler.savetofile(students);
-                    return "Student with ID " + id + " updated successfully.";
-
-                } catch (IllegalArgumentException e) {
-                    return "Update failed: " + e.getMessage();
+    for (Student s : students) {
+        if (s.getId() == id) {
+            if (newData.getId() != id) {
+                for (Student other : students) {
+                    if (other.getId() == newData.getId()) {
+                        return "Cannot update: ID " + newData.getId() + " already exists.";
+                    }
                 }
             }
-        }
-        return "Student with ID " + id + " not found.";
 
-    } 
+            try {
+                s.setId(newData.getId());
+                s.setFullName(newData.getFullName());
+                s.setAge(newData.getAge());
+                s.setGender(newData.getGender());
+                s.setDepartment(newData.getDepartment());
+                s.setGpa(newData.getGpa());
+
+                FileHandler.savetofile(students);
+                return "Student with ID " + id + " updated successfully.";
+
+            } catch (IllegalArgumentException e) {
+                return "Update failed: " + e.getMessage();
+            }
+        }
+    }
+    return "Student with ID " + id + " not found.";
+} 
     
     public String deleteStudent(int id) {
         for (Student s : students) {
