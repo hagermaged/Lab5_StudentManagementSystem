@@ -4,6 +4,11 @@
  */
 package gui;
 
+import java.awt.Container;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Hajer1
@@ -180,15 +185,78 @@ public class DashboardPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        System.exit(0);
+       int choice = JOptionPane.showConfirmDialog(this,
+        "Are you sure you want to logout?",
+        "Confirm Logout",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.QUESTION_MESSAGE);
+    
+    if (choice == JOptionPane.YES_OPTION) {
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+        if (window instanceof MainFrame) {
+            MainFrame mainFrame = (MainFrame) window;
+            mainFrame.showPanel("Login");
+        }
+    }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        System.out.println("View Students button clicked!");
+    try {
+        // Debug: Print parent hierarchy
+        Container parent = getParent();
+        System.out.println("Current panel parent: " + parent);
+        
+        // Debug: Print window ancestor
+        java.awt.Window window = SwingUtilities.getWindowAncestor(this);
+        System.out.println("Window ancestor: " + window);
+        System.out.println("Window class: " + (window != null ? window.getClass().getName() : "null"));
+        
+        // Try the dialog approach - most reliable
+        JDialog viewDialog = new JDialog();
+        viewDialog.setTitle("View Students");
+        viewDialog.setModal(true);
+        viewDialog.setSize(900, 600);
+        viewDialog.setLocationRelativeTo(this);
+        
+        // Try to get MainFrame if it exists
+        MainFrame mainFrame = null;
+        if (window instanceof MainFrame) {
+            mainFrame = (MainFrame) window;
+            System.out.println("Found MainFrame instance!");
+        }
+        
+        ViewStudentsPanel viewPanel = new ViewStudentsPanel();
+        viewDialog.add(viewPanel);
+        viewDialog.setVisible(true);
+        
+        System.out.println("View Students panel opened successfully!");
+        
+    } catch (Exception ex) {
+        System.err.println("Error opening View Students: " + ex.getMessage());
+        ex.printStackTrace();
+        
+        JOptionPane.showMessageDialog(this,
+            "Failed to open View Students.\nError: " + ex.getMessage(),
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+    }   
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+    System.out.println("=== SEARCH/UPDATE BUTTON CLICKED ===");
+    java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+    System.out.println("Window found: " + window);
+    System.out.println("Window is MainFrame: " + (window instanceof MainFrame));
+    
+    if (window instanceof MainFrame) {
+        MainFrame mainFrame = (MainFrame) window;
+        System.out.println("Switching to SearchUpdatePanel...");
+        mainFrame.showPanel("SearchUpdatePanel");
+        System.out.println("Switch completed!");
+    }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
@@ -207,6 +275,11 @@ public class DashboardPanel extends javax.swing.JPanel {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+    if (window instanceof MainFrame) {
+        MainFrame mainFrame = (MainFrame) window;
+        mainFrame.showPanel("DeleteStudentPanel");
+    }
     }//GEN-LAST:event_jButton9ActionPerformed
 
 

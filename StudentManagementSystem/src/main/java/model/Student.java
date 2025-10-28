@@ -53,7 +53,7 @@ public class Student {
             throw new IllegalArgumentException("❌ Full name cannot be empty.");
         }
         // check that fullname contain letters only
-        if (!fullName.matches("[a-zA-Z ]+")) {
+        if (!fullName.matches("^[a-zA-Z ]+$")) {
             throw new IllegalArgumentException("❌ Full name must contain letters only.");
         }
         this.FullName = fullName.trim();

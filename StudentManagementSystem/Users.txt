@@ -1,0 +1,3 @@
+admin,admin123
+teacher,teacher123
+user,password123

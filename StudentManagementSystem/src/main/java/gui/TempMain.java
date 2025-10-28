@@ -9,8 +9,12 @@
  */
 package gui;
 
+import java.io.IOException;
+
 public class TempMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+       // Debug the file first
+       // model.FileHandler.debugFile();
         // Use your actual MainFrame instead of basic JFrame
         MainFrame frame = new MainFrame();
         frame.setVisible(true);
