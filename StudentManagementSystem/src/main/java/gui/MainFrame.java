@@ -19,14 +19,21 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() throws IOException {
     initComponents();
+     //setting the size of the frame
+    setSize(800, 600);
+    setResizable(false);
+    setLocationRelativeTo(null);
+    
+    MainPanel.setSize(800,600);
+    MainPanel.setLocation((getWidth()-MainPanel.getWidth())/2,(getHeight()-MainPanel.getHeight())/2);
     
     // Add all panels to CardLayout
     LoginPanel loginPanel = new LoginPanel();
     DashboardPanel dashboard = new DashboardPanel();
     AddStudentPanel addStudent = new AddStudentPanel();
     //ViewStudentsPanel viewStudents = new ViewStudentsPanel();
-     SearchUpdatePanel searchUpdate = new SearchUpdatePanel();  
-     DeleteStudentPanel deleteStudent = new DeleteStudentPanel();
+    SearchUpdatePanel searchUpdate = new SearchUpdatePanel();  
+    DeleteStudentPanel deleteStudent = new DeleteStudentPanel();
     MainPanel.add(loginPanel, "Login");
     MainPanel.add(dashboard, "Dashboard");
     MainPanel.add(addStudent, "AddStudentPanel");
@@ -36,13 +43,10 @@ public class MainFrame extends javax.swing.JFrame {
     // Show dashboard first
     showPanel("Login");
     
-    setSize(800, 600);
-    setResizable(true);
+    setSize(900, 700);
+    setResizable(false);
     setLocationRelativeTo(null);
-    
-    pack(); // Add this line to force the window to resize properly
 }
-// Add this method to switch panels
    public void showPanel(String panelName) {
         // Get the CardLayout from MainPanel
         java.awt.CardLayout cardLayout = (java.awt.CardLayout) MainPanel.getLayout();
@@ -67,26 +71,14 @@ public class MainFrame extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
+        setSize(new java.awt.Dimension(900, 700));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         MainPanel.setBackground(new java.awt.Color(252, 250, 247));
         MainPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         MainPanel.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1025, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(MainPanel, new java.awt.GridBagConstraints());
+        MainPanel.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
