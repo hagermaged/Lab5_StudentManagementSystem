@@ -31,7 +31,7 @@ public class ViewStudentsPanel extends javax.swing.JPanel {
     public ViewStudentsPanel() throws IOException {
        
         initComponents();
-        this.studentManager=new StudentManager();
+        this.studentManager= new StudentManager();
         setupTable();
         loadStudentData();
     }
@@ -52,7 +52,9 @@ public class ViewStudentsPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(252, 250, 247));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setForeground(new java.awt.Color(0, 30, 80));
         setAlignmentX(0.0F);
         setAlignmentY(0.0F);
         setMinimumSize(new java.awt.Dimension(820, 600));
