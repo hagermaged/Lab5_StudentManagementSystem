@@ -20,47 +20,8 @@ public class DashboardPanel extends javax.swing.JPanel {
      */
     public DashboardPanel() {
         initComponents();
-        // Make buttons rounded - add this ONE method call
-        makeButtonsRounded();
         setPreferredSize(new java.awt.Dimension(800, 600));
     }
-    private void makeButtonsRounded() {
-    // Apply to all buttons
-//    javax.swing.JButton[] buttons = {jButton8, jButton4, jButton9, jButton6, jButton7};
-//    for (javax.swing.JButton button : buttons) {
-////        button.setContentAreaFilled(false);
-////        button.setOpaque(false);
-//        button.setBorder(new RoundedBorder(20, new java.awt.Color(0, 30, 80), 2));
-    }
-
-// Simple border class
-//class RoundedBorder implements javax.swing.border.Border {
-//    private int radius;
-//    private java.awt.Color color;
-//    private int thickness;
-//
-//    RoundedBorder(int radius, java.awt.Color color, int thickness) {
-//        this.radius = radius;
-//        this.color = color;
-//        this.thickness = thickness;
-//    }
-//
-//    public java.awt.Insets getBorderInsets(java.awt.Component c) {
-//        return new java.awt.Insets(this.radius, this.radius, this.radius, this.radius);
-//    }
-//
-//    public boolean isBorderOpaque() {
-//        return true;
-//    }
-//
-//    public void paintBorder(java.awt.Component c, java.awt.Graphics g, int x, int y, int width, int height) {
-//        java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
-//        g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
-//        g2.setColor(color);
-//        g2.setStroke(new java.awt.BasicStroke(thickness));
-//        g2.drawRoundRect(x + thickness/2, y + thickness/2, width - thickness, height - thickness, radius, radius);
-//    }
-//}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

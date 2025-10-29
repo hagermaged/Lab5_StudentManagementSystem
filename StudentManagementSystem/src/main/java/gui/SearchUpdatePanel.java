@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package gui;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -11,21 +8,17 @@ import java.util.*;
 import model.StudentManager;
 import model.Student;
 import model.FileHandler;
-/**
- *
- * @author orignal store
- */
-public class SearchUpdatePanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form SearchStudent
-     */
-     private StudentManager studentManager;
+
+public class SearchUpdatePanel extends javax.swing.JPanel {
+    //intializing variables
+    private StudentManager studentManager;
     private DefaultTableModel tableModel;
     
+    //constructor
     public SearchUpdatePanel() {
         initComponents();
-         this.studentManager = new StudentManager();
+        this.studentManager = new StudentManager();
         setupTable();
         setupSearchType(); // Initialize search type
     }
@@ -50,13 +43,13 @@ public class SearchUpdatePanel extends javax.swing.JPanel {
         // Add selection listener to populate form when row is selected
         jTable1.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && jTable1.getSelectedRow() != -1) {
-                populateFormFromSelectedRow();
+                fillFormFromTable();
             }
         });
     }
            private void setupSearchType() {
         // Set default search type to "By Name"
-       jComboBox1.setSelectedIndex(0);
+       searchType.setSelectedIndex(0);
            }
            
 
@@ -72,70 +65,84 @@ public class SearchUpdatePanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        searchType = new javax.swing.JComboBox<>();
+        searchKeyword = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        newId = new javax.swing.JTextField();
+        newName = new javax.swing.JTextField();
+        newAge = new javax.swing.JTextField();
+        newDepartment = new javax.swing.JTextField();
+        newGpa = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
+        returnToMenuButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        newGender = new javax.swing.JComboBox<>();
 
-        setMinimumSize(new java.awt.Dimension(820, 600));
-        setPreferredSize(new java.awt.Dimension(820, 600));
+        setBackground(new java.awt.Color(252, 250, 247));
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 30, 80));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("SEARCH/UPDATE");
+        jLabel1.setText("☆ SEARCH/UPDATE ☆");
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 102, 0));
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 30, 80));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Search Student");
+        jLabel2.setText("1- Search Student");
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 102, 0));
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 30, 80));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Update Student Information");
+        jLabel3.setText("2- Update Student Information");
 
-        jComboBox1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "by ID", "by Name", " " }));
-        jComboBox1.setName("searchTypeCombo"); // NOI18N
+        searchType.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        searchType.setForeground(new java.awt.Color(0, 30, 80));
+        searchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "by ID", "by Name", "" }));
+        searchType.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        searchType.setFocusable(false);
+        searchType.setName("searchTypeCombo"); // NOI18N
 
-        jTextField1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setName("searchField"); // NOI18N
+        searchKeyword.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        searchKeyword.setForeground(new java.awt.Color(0, 30, 80));
+        searchKeyword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        searchKeyword.setName("searchField"); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 30, 80));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Search By:");
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 30, 80));
         jLabel5.setText("Keyword:");
 
-        jButton1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setName("searchButton"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(210, 220, 235));
+        searchButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        searchButton.setForeground(new java.awt.Color(0, 30, 80));
+        searchButton.setText("Search");
+        searchButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        searchButton.setBorderPainted(false);
+        searchButton.setName("searchButton"); // NOI18N
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -154,62 +161,91 @@ public class SearchUpdatePanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
         jTable1.getAccessibleContext().setAccessibleName("resultsTable");
 
-        jTextField2.setName("updateIdField"); // NOI18N
+        newId.setName("updateIdField"); // NOI18N
 
-        jTextField3.setName("updateNameField"); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        newName.setName("updateNameField"); // NOI18N
+        newName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                newNameActionPerformed(evt);
             }
         });
 
-        jTextField4.setName("updateAgeField"); // NOI18N
+        newAge.setName("updateAgeField"); // NOI18N
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", " " }));
-        jComboBox2.setName("updateGenderCombo"); // NOI18N
+        newDepartment.setName("updateDeptField"); // NOI18N
 
-        jTextField5.setName("updateDeptField"); // NOI18N
+        newGpa.setName("updateGpaField"); // NOI18N
 
-        jTextField6.setName("updateGpaField"); // NOI18N
-
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 30, 80));
         jLabel6.setText("ID");
 
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 30, 80));
         jLabel7.setText("Name");
 
+        jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 30, 80));
         jLabel8.setText("Age");
 
+        jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 30, 80));
         jLabel9.setText("Gender");
 
+        jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 30, 80));
         jLabel10.setText("Department");
 
+        jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 30, 80));
         jLabel11.setText("Gpa");
 
-        jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton2.setText("Update");
-        jButton2.setName("updateButton"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        updateButton.setBackground(new java.awt.Color(210, 220, 235));
+        updateButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        updateButton.setForeground(new java.awt.Color(0, 30, 80));
+        updateButton.setText("Update");
+        updateButton.setName("updateButton"); // NOI18N
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updateButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton3.setText("Clear Form");
-        jButton3.setName("clearButton"); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        clearButton.setBackground(new java.awt.Color(210, 220, 235));
+        clearButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        clearButton.setForeground(new java.awt.Color(0, 30, 80));
+        clearButton.setText("Clear Form");
+        clearButton.setName("clearButton"); // NOI18N
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                clearButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton4.setText("Return To Menu");
-        jButton4.setName("returnButton"); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        returnToMenuButton.setBackground(new java.awt.Color(210, 220, 235));
+        returnToMenuButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        returnToMenuButton.setForeground(new java.awt.Color(0, 30, 80));
+        returnToMenuButton.setText("Return To Menu");
+        returnToMenuButton.setName("returnButton"); // NOI18N
+        returnToMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                returnToMenuButtonActionPerformed(evt);
             }
         });
+
+        jSeparator1.setBackground(new java.awt.Color(0, 30, 80));
+        jSeparator1.setForeground(new java.awt.Color(0, 30, 80));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator3.setBackground(new java.awt.Color(0, 30, 80));
+        jSeparator3.setForeground(new java.awt.Color(0, 30, 80));
+
+        newGender.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        newGender.setForeground(new java.awt.Color(0, 30, 80));
+        newGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        newGender.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        newGender.setFocusable(false);
+        newGender.setName("searchTypeCombo"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -277,17 +313,8 @@ public class SearchUpdatePanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -326,72 +353,98 @@ public class SearchUpdatePanel extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jComboBox1.getAccessibleContext().setAccessibleName("searchTypeCombo");
-        jTextField3.getAccessibleContext().setAccessibleName("updateNameField");
+        searchType.getAccessibleContext().setAccessibleName("searchTypeCombo");
+        newName.getAccessibleContext().setAccessibleName("updateNameField");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void fillFormFromTable() {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow >= 0) {
+            // Retrieve data from the model (not the view, in case of sorting/filtering)
+            int modelRow = jTable1.convertRowIndexToModel(selectedRow);
+            
+            // Assuming the table model structure is: ID, Full Name, Age, Gender, Department, GPA
+            String id = tableModel.getValueAt(modelRow, 0).toString();
+            String name = tableModel.getValueAt(modelRow, 1).toString();
+            String age = tableModel.getValueAt(modelRow, 2).toString();
+            String gender = tableModel.getValueAt(modelRow, 3).toString();
+            String department = tableModel.getValueAt(modelRow, 4).toString();
+            String gpa = tableModel.getValueAt(modelRow, 5).toString();
+
+            // Populate text fields using the new variable names
+            newId.setText(id); 
+            newName.setText(name); 
+            newAge.setText(age); 
+            newGender.setSelectedItem(gender); 
+            newDepartment.setText(department); 
+            newGpa.setText(gpa); 
+            
+            // ID must be non-editable during update
+            newId.setEditable(false);
+        }
+    }
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         // TODO add your handling code here:
         clearForm();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_clearButtonActionPerformed
  private void clearForm() {
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jComboBox2.setSelectedIndex(0);
-        jTextField5.setText("");
-        jTextField6.setText("");
+        newId.setText("");
+        newName.setText("");
+        newAge.setText("");
+        newGender.setSelectedIndex(0);
+        newDepartment.setText("");
+        newGpa.setText("");
         jTable1.clearSelection();
     }
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void newNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_newNameActionPerformed
 //search button clicked
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-         String keyword = jTextField1.getText().trim();
-        if (keyword.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a search term!", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+    String keyword = searchKeyword.getText().trim();
+    if (keyword.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter a search term!", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
 
-        try {
-            String searchType = jComboBox1.getSelectedItem().toString();
-            ArrayList<Student> results;
-            
-            if ("By ID".equals(searchType)) {
-                // Search by ID only - exact match
-                results = searchById(keyword);
-            } else {
-                // Search by Name - partial match
-                results = (ArrayList<Student>) studentManager.searchStudent(keyword);
-            }
-        updateResultsTable(results);
-            
-            if (results.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No students found!", "Information", JOptionPane.INFORMATION_MESSAGE);
-            }
+    try {
+        String selectedSearchType = searchType.getSelectedItem().toString(); // CHANGED: searchType -> selectedSearchType
+        ArrayList<Student> results;
         
-        }catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error searching: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        if ("by ID".equals(selectedSearchType)) { // CHANGED: searchType -> selectedSearchType
+            // Search by ID only - exact match
+            results = searchById(keyword);
+        } else {
+            // Search by Name - partial match
+            results = (ArrayList<Student>) studentManager.searchStudent(keyword);
         }
-                
-    }//GEN-LAST:event_jButton1ActionPerformed
+        updateResultsTable(results);
+        
+        if (results.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No students found!", "Information", JOptionPane.INFORMATION_MESSAGE);
+        }
+    
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error searching: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+                    
+    }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-         if (jTextField2.getText().trim().isEmpty()) {
+         if (newId.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please select a student to update!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         try {
-            int id = Integer.parseInt(jTextField2.getText().trim());
-            String name = jTextField3.getText().trim();
-            double age = Double.parseDouble(jTextField4.getText().trim());
-            String gender = jComboBox2.getSelectedItem().toString();
-            String department = jTextField5.getText().trim();
-            double gpa = Double.parseDouble(jTextField6.getText().trim());
+            int id = Integer.parseInt(newId.getText().trim());
+            String name = newName.getText().trim();
+            double age = Double.parseDouble(newAge.getText().trim());
+            String gender = newGender.getSelectedItem().toString();
+            String department = newDepartment.getText().trim();
+            double gpa = Double.parseDouble(newGpa.getText().trim());
 
             // Create updated student object
             Student updatedStudent = new Student(id, name, age, gender, department, gpa);
@@ -403,7 +456,7 @@ public class SearchUpdatePanel extends javax.swing.JPanel {
             if (result.contains("successfully")) {
                 clearForm();
                 // Refresh the search results
-                jButton2ActionPerformed(null);
+                clearButtonActionPerformed(null);
             }
             
         } catch (NumberFormatException e) {
@@ -412,16 +465,16 @@ public class SearchUpdatePanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Update failed: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_updateButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void returnToMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMenuButtonActionPerformed
         // TODO add your handling code here:
           java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
         if (window instanceof MainFrame) {
             MainFrame mainFrame = (MainFrame) window;
             mainFrame.showPanel("Dashboard");
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_returnToMenuButtonActionPerformed
 
   
     
@@ -447,7 +500,7 @@ public class SearchUpdatePanel extends javax.swing.JPanel {
         
         return results;
     }
-private void updateResultsTable(ArrayList<Student> students) {
+    private void updateResultsTable(ArrayList<Student> students) {
         tableModel.setRowCount(0); // Clear existing data
         
         for (Student student : students) {
@@ -461,38 +514,18 @@ private void updateResultsTable(ArrayList<Student> students) {
             });
         }
     }
- private void populateFormFromSelectedRow() {
-        int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow != -1) {
-            jTextField2.setText(tableModel.getValueAt(selectedRow, 0).toString());
-            jTextField3.setText(tableModel.getValueAt(selectedRow, 1).toString());
-            jTextField4.setText(tableModel.getValueAt(selectedRow, 2).toString());
-            jComboBox2.setSelectedItem(tableModel.getValueAt(selectedRow, 3).toString());
-            jTextField5.setText(tableModel.getValueAt(selectedRow, 4).toString());
-            jTextField6.setText(tableModel.getValueAt(selectedRow, 5).toString());
-        }
+    private void searchTypeActionPerformed(java.awt.event.ActionEvent evt) {
+        String selectedSearchType = searchType.getSelectedItem().toString(); // Changed variable name
+    if ("By ID".equals(selectedSearchType)) {
+        searchKeyword.setToolTipText("Enter student ID (numbers only)");
+    } else {
+        searchKeyword.setToolTipText("Enter student name (full or partial)");
     }
-     
-  // Add this method to handle search type changes if needed
-    private void searchTypeComboActionPerformed(java.awt.event.ActionEvent evt) {
-        // You can add logic here to clear search results or show hints
-        // when the search type changes
-        String searchType = jComboBox1.getSelectedItem().toString();
-        if ("By ID".equals(searchType)) {
-            jTextField1.setToolTipText("Enter student ID (numbers only)");
-        } else {
-            jTextField1.setToolTipText("Enter student name (full or partial)");
-        }
     }                                           
         
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton clearButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -505,12 +538,19 @@ private void updateResultsTable(ArrayList<Student> students) {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField newAge;
+    private javax.swing.JTextField newDepartment;
+    private javax.swing.JComboBox<String> newGender;
+    private javax.swing.JTextField newGpa;
+    private javax.swing.JTextField newId;
+    private javax.swing.JTextField newName;
+    private javax.swing.JButton returnToMenuButton;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchKeyword;
+    private javax.swing.JComboBox<String> searchType;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
